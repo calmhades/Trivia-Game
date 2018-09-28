@@ -1,26 +1,79 @@
 $(document).ready(function() {
-
+    // question number for calling arrays
     var questionNumber = 0;
-
-    var time = 20;
-
+    // standard time is 15 seconds
+    var time = 15;
+    // number of correct answers
     var correctGuess = 0;
-
+    //number of incorrect answers
     var incorrectGuess = 0;
-
+    // questions, multiple choices, and correct answers in an array
     var questions = [
             {
-                question: "What is the answer to this question?",
-                choices: ["This?", "That?", "I don't know?", "Or maybe it's this?"],
-                correctAnswer: "This?",
+                question: "Who first released Killing Me Softly With His Love?",
+                choices: ["Lauryn Hill", "Fugees", "Roberta Flack", "Lori Lieberman"],
+                correctAnswer: "Roberta Flack",
             },
             {
-                question: "What is the answer to this question?",
-                choices: ["This?", "That?", "I don't know?", "Or maybe it's this?"],
-                correctAnswer: "This?",
-            }
-    ]
+                question: "Who originally recorded I Just Want To Make Love To You? ",
+                choices: ["Willie Dixon", "Foghat", "Muddy Waters", "The Animals"],
+                correctAnswer: "Muddy Waters",
+            },
+            {
+                question: "Who originally recorded Tainted Love?",
+                choices: ["Marilyn Manson", "Soft Cell", "Oingo Boingo", "Gloria Jones"],
+                correctAnswer: "Gloria Jones",
+            },
+            {
+                question: "Who wrote Nothing Compares 2 U?",
+                choices: ["Sinead O'Conner", "Prince", "Tori Amos", "Natalie Imbruglia"],
+                correctAnswer: "Prince",
+            },
+            {
+                question: "Who wrote Blinded By The Light?",
+                choices: ["Foghat", "Manfred Mann's Earth Band", "Tom Jones", "Bruce Springsteen"],
+                correctAnswer: "Bruce Springsteen",
+            },
+            {
+                question: "Who wrote Red Red Wine?",
+                choices: ["UB40", "Prince", "Tom Jones", "Neil Diamond"],
+                correctAnswer: "Neil Diamond",
+            },
+            {
+                question: "Who wrote Twist And Shout?",
+                choices: ["The Who", "The Beatles", "The Isley Brothers", "The Top Notes"],
+                correctAnswer: "The Top Notes",
+            },
+            {
+                question: "Who wrote Venus?",
+                choices: ["The Bangles", "Bananarama", "Shocking Blue", "Kim Wilde"],
+                correctAnswer: "Shocking Blue",
+            },
+            {
+                question: "Who wrote Girls Just Want To Have Fun?",
+                choices: ["Robert Hazard", "Janet Jackson", "Cyndi Lauper", "Tom Tom Club"],
+                correctAnswer: "Robert Hazard",
+            },
+            {
+                question: "Who wrote Ring Of Fire?",
+                choices: ["Social Distortion", "Johnny Cash", "Muddy Waters", "Anita Carter"],
+                correctAnswer: "Anita Carter",
+            },
+            {
+                question: "Who wrote The First Cut Is The Deepest?",
+                choices: ["Sheryl Crow", "Cat Stevens", "Paul Simon", "Rod Stewert"],
+                correctAnswer: "Cat Stevens",
+            },
+            {
+                question: "Who wrote Dazed And Confused?",
+                choices: ["Yardbirds", "Muddy Waters", "Led Zepplin", "Jake Holmes"],
+                correctAnswer: "Jake Holmes",
+            },
 
+
+
+    ]
+    //function to pull information from arrays
     function questionDisplay()  {
         $("#gameDisplay").append(
             "<p class=question>" + questions[questionNumber].question + "</p>"
@@ -31,8 +84,7 @@ $(document).ready(function() {
         );
         
     }
-    // questionDisplay()
-    // console.log(questions[questionNumber].correctAnswer)
+    // function to clear screen and show correct answer was selected
     function userWin() {
         $("#gameDisplay").html(
             "<h1>You answered correctly!</h1>" +
@@ -42,8 +94,8 @@ $(document).ready(function() {
         correctGuess++;
         questionNumber++;
     }
-    // userWin()
     
+    // function to clear screen and show correct answer on wrong guess
     function userLose () {
         $("#gameDisplay").html(
             "<h1>Wrong!</h1>" +
@@ -53,8 +105,8 @@ $(document).ready(function() {
         incorrectGuess ++;
         questionNumber ++;
     }
-    // userLose ()
-
+    
+    //function to clear screen and show correct answer if user doesn't answer in time
     function userTimeout () {
         if (time ===0) {
             $("#gameDisplay").html("<h1>Time's up!</h1>");
@@ -64,6 +116,7 @@ $(document).ready(function() {
             questionNumber++;
         }
 }
+    //function to show the results at the emd of the game
     function results () {
         $("#gameDisplay").html(
             "<h1>Here's your score!</h1>" +
@@ -74,7 +127,7 @@ $(document).ready(function() {
         gameReset();
         $("#gameDisplay").click(nextQuestion);
 }
-
+    //function to setup timer
     function timer () {
             clock = setInterval(decrement, 1000);
             function decrement() {
@@ -88,6 +141,7 @@ $(document).ready(function() {
                 $("#timer").html(time);
             }
     }
+    //function to move to the next question after timeout
     function nextQuestion() {
         if (questionNumber < questions.length) {
             time = 15;
@@ -100,14 +154,14 @@ $(document).ready(function() {
             results();
         }
     }
-
+    //resets game
     function gameReset() {
         questionNumber = 0;
         correctGuess = 0;
         incorrectGuess =0;
     }
     
-
+    // function to select guess 
     $("#gameDisplay").on("click", ".choices", function() {
         var userGuess = $(this).text();
         if (userGuess === questions[questionNumber].correctAnswer) {
@@ -118,11 +172,8 @@ $(document).ready(function() {
             clearInterval(clock);
             userLose();
         }
-    }
-    // function startGame() {
-    //     $("#gameDisplay").html(
-    //         "<h1>Click to start the game at any time!</h1>"
-        )
+    })
+    //starts game
     $("#start").click(nextQuestion)
     
 })        
