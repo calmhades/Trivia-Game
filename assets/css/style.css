@@ -1,0 +1,20 @@
+/* .container{
+    align-content: center;
+} */
+.choice {
+    font-size: 20px;
+    /* width: 50%; */
+    background-color: white;
+    border: 5px;
+    border-color: black;
+    /* margin-left: 25%;
+    margin-right: 25%; */
+
+}
+.question {
+    font-size: 30px;
+}
+.jumbotron {
+    padding-left: 15%;
+    padding-right: 15%;
+}
